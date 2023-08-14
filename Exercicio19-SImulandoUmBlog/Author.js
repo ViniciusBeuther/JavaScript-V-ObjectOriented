@@ -1,20 +1,21 @@
 const Post = require('./Post.js')
+const Comment = require('./Comment.js')
 
 const postList = []
 class Author{
     constructor(name){
         this.name = name;
-        this.author_list = []
+        this.post_list = []
     }
 
     createPost(title, description){
-        let auxPost = new Post(title, description, this.name)
-        this.author_list.push(auxPost.getPost())
+        const post = new Post(title, description, this)
+        this.post_list.push(post)
+        return post
     }
 
-    getList(){
-        return(this.author_list)
-    }
+    
+
 
 }
 
