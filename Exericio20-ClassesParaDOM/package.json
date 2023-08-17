@@ -1,0 +1,13 @@
+{
+  "name": "exericio20-classesparadom",
+  "version": "1.0.0",
+  "description": "Crie um conjunto de classes em javascript para auxiliar na interação com o DOM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "index": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
