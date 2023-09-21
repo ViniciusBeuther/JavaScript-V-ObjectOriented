@@ -1,40 +1,28 @@
-import InputComponent from "./InputComponents.js"
-
-// New component, add create a new element in page //
-class Component {
-    #domReference
-    #initialReference
-    constructor(domReference,  type){
-        this.#domReference = domReference
-        this.#initialReference = this.build()
-        this.type = new InputComponent(type)
+export class Component {
+    #element = null;
+    constructor(tag, parent, option){
+        this.tag = tag;
+        this.parent = parent;
+        this.option = option;
+        this.build()
     }
 
-    //Get DOM reference //
-    getDomReference(){
-        return this.#domReference
+    getElement(){
+        return this.#element;
     }
 
-    //Get the initial reference, the first DOM element //
-    getInitialReference(){
-        return this.#initialReference
-    }
-
-    // Create a new input //
     build(){
-        this.inputArea = this.getDomReference()
-        return this.inputArea
+        this.#element = document.createElement(this.tag);
+        Object.assign(this.#element, this.option);
+        return this;
     }
-    
-    // Add the input create on build method //
-    render(){
-        const areaToAdd = this.getInitialReference()
-        const componentToAdd = document.createElement('input')
-        componentToAdd.type = 'text'
-        areaToAdd.appendChild(componentToAdd)
 
-        return 'Added'
+    render(){
+        if (this.parent instanceof Component){
+            this.parent.getElement.append(this.#element)
+        }
+        else{
+            document.querySelector(this.parent).append(this.#element)
+        }
     }
 }
-
-export default Component

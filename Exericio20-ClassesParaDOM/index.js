@@ -1,15 +1,8 @@
-import Component from './Component.js'
-import InputComponent from './InputComponents.js'
+import { Form } from "./Form.js";
+import { Input } from "./Input.js";
+import { Label } from "./Label.js";
+import { Component } from "./Component.js";
 
-const mainContainer = document.getElementById('container')
-const addButton = document.getElementById('addBtn')
-
-
-const myComponent = new Component(mainContainer, 'text')
-
-addButton.addEventListener('click', function (){
-    console.log(myComponent.build(mainContainer))
-    console.log(myComponent.render(mainContainer))
-})
-
-//const inputParam = new InputComponent('text')
+const title = new Component('h1', 'body', { textContent: 'Hello world' })
+console.log(title)
+title.render()
