@@ -1,15 +1,29 @@
-export class Loan{
+import { Installment } from "./Installment.js";
+
+export class Loan {
+    static #loanRate = 0;
+    
     constructor(valueOfLoan, date, numberOfInstallment){
-        this.valueOfLoan = valueOfLoan;
-        this.date = date;
-        this.numberOfInstallment = numberOfInstallment;
-
-        let percent = (Loan.interestRate / 100)
-        this.installmentPrice = ((this.valueOfLoan * percent) + this.valueOfLoan) / this.numberOfInstallment;
+    this.totalLoan = valueOfLoan;
+    this.date = date;
+    this.paymentsRemaining = numberOfInstallment;
+    this.createInstallment()
     }
 
-    getvalueOfLoan () {
-        return console.log(this.valueOfLoan) 
+    static get loanRate(){
+    return this.#loanRate;
     }
-    static interestRate = 100;
+
+    static set loanRate( newRate ){
+    Loan.#loanRate = newRate;
+    }
+
+    calculateRate(rate){
+    let newRate = rate / 100 + 1;
+    return newRate;
+    }
+
+    createInstallment() {
+        return new Installment(this.totalLoan, this.date, this.paymentsRemaining);
+    }
 }
