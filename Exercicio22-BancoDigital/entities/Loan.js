@@ -24,6 +24,6 @@ export class Loan {
     }
 
     createInstallment() {
-        return new Installment(this.totalLoan, this.date, this.paymentsRemaining);
+        this.installment = new Installment(this.totalLoan, this.date, this.paymentsRemaining);
     }
 }
