@@ -1,11 +1,9 @@
-export class Transfer {
-    sentBy
-    receivedBy
+module.exports = class Transfer {
 
-    constructor(sentBy, receivedBy, amount, date){
+    constructor(sentBy, receivedBy, value){
         this.sentBy = sentBy;
         this.receivedBy = receivedBy;
-        this.amount = amount;
-        this.date = date;
+        this.value = value;
+        this.date = new Date();
     }
 }

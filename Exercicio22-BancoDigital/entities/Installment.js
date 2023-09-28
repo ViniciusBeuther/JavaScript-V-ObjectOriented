@@ -1,22 +1,23 @@
-import { Loan } from "./Loan.js";
+const Loan = require("./Loan")
 
-export class Installment extends Loan {
-    constructor(valueOfLoan, date, numberOfInstallment) {
-        super(valueOfLoan, date, numberOfInstallment);
-
-        this.installmentList = [];
-        const installmentPrice = this.calculateInstallment();
-        for (let i = 1; i <= this.numberOfPaymentsRemaining; i++) {
-        this.installmentList.push({ installmentPrice, i });
-        }
-}
-
-    calculateInstallment() {
-        let price = (this.calculateRate(Loan.loanRate) * this.totalLoan) / this.numberOfPaymentsRemaining;
-        return price;
-}
-    getInstallmentList(){
-        return this.installmentList;
+module.exports = class Installment {
+    constructor(value, numberOfInstallments, fee){
+        this.value = value
+        this.numberOfInstallments = numberOfInstallments
+        this.installment = []
+        this.status = 'pending'
+        this.generateInstallment(value, numberOfInstallments, fee)
     }
 
+    getInstallmentList(){
+        return this.installment
+    }
+
+    generateInstallment(value, numberOfInstallments, fee){
+        for(let i = 1; i <= numberOfInstallments; i++){
+            const installmentValue = (value * fee) / numberOfInstallments;
+            const installmentInfo = [installmentValue, i, this.status];
+            this.installment.push(installmentInfo);
+        }
+    }
 }

@@ -1,29 +1,21 @@
-import { Installment } from "./Installment.js";
+const Installment = require("./Installment")
 
-export class Loan {
-    static #loanRate = 0;
-    
-    constructor(valueOfLoan, date, numberOfInstallment){
-    this.totalLoan = valueOfLoan;
-    this.date = date;
-    this.paymentsRemaining = numberOfInstallment;
-    this.createInstallment()
+module.exports = class Loan {
+
+    static #fee = 1.05
+
+    constructor(value, numberOfInstallment){
+        this.value = value
+        this.numberOfInstallment = numberOfInstallment
+        this.installment = new Installment(value, numberOfInstallment, Loan.fee)
     }
 
-    static get loanRate(){
-    return this.#loanRate;
+
+    static set fee(percent){
+        this.#fee = 1 + (percent / 100)
     }
 
-    static set loanRate( newRate ){
-    Loan.#loanRate = newRate;
-    }
-
-    calculateRate(rate){
-    let newRate = rate / 100 + 1;
-    return newRate;
-    }
-
-    createInstallment() {
-        this.installment = new Installment(this.totalLoan, this.date, this.paymentsRemaining);
+    static get fee(){
+        return this.#fee
     }
 }
